@@ -1,7 +1,14 @@
 package main
 
-import rest "kang-by-xoverse/api/rest"
+import (
+	"kang-by-xoverse/api/rest"
+	"kang-by-xoverse/api/utils"
+)
 
 func main() {
-	rest.RunRestServer()
+	utils.LoadDotEnv()
+	rdb, close := utils.GetRedisClient()
+	rest.RunRestServer(rdb)
+
+	close()
 }
