@@ -31,15 +31,3 @@ func Emit(rdb *redis.Client, event string, data interface{}) {
 	}
 	rdb.Publish(ctx, "event", event+":"+string(jsonData))
 }
-
-func Listen(rdb *redis.Client, callback func(string)) {
-	var ctx = context.Background()
-
-	pubsub := rdb.Subscribe(ctx, "event")
-	defer pubsub.Close()
-
-	ch := pubsub.Channel()
-	for msg := range ch {
-		callback(msg.Payload)
-	}
-}
