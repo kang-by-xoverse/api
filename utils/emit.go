@@ -2,8 +2,6 @@ package utils
 
 import (
 	"context"
-	"encoding/json"
-	"fmt"
 
 	"github.com/go-redis/redis/v8"
 )
@@ -24,10 +22,12 @@ func GetRedisClient() (*redis.Client, func()) {
 func Emit(rdb *redis.Client, event string, data interface{}) {
 	var ctx = context.Background()
 
-	jsonData, err := json.Marshal(data)
-	if err != nil {
-		fmt.Printf("Error: %s", err)
-		return
-	}
-	rdb.Publish(ctx, "event", event+":"+string(jsonData))
+	// jsonData, err := json.Marshal(data)
+	// if err != nil {
+	// 	fmt.Printf("Error: %s", err)
+	// 	return
+	// }
+
+	// rdb.Publish(ctx, "event", event+":"+string(jsonData))
+	rdb.Publish(ctx, "event", "spawn_color=red")
 }
