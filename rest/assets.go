@@ -5,9 +5,10 @@ import (
 	"github.com/go-redis/redis/v8"
 )
 
-// Assets: Every ownable asset in the metaverse (NFTs), creatable,
-// could be owned by an Identity owner or the governor (in case of
-// for-sell properties or unowned properties)
+type CreateAsset struct {
+	Name  string `json:"name" binding:"required"`
+	Owner string `json:"owner" binding:"required"`
+}
 
 func AppendAssetsRoute(app *gin.Engine, rdb *redis.Client) {
 	r := app.Group("/api/assets")

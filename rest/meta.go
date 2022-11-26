@@ -40,6 +40,7 @@ func AppendMetaRoute(app *gin.Engine, rdb *redis.Client) {
 	})
 
 	r.POST("/", func(c *gin.Context) {
+
 		var body CreateMeta
 		err := c.BindJSON(&body)
 		if err != nil {
